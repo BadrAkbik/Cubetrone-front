@@ -35,7 +35,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className='mb-7 max-w-screen-xl mx-auto'>
+            <nav className='mb-7 max-w-[1400px] mx-auto'>
                 <div className="flex flex-wrap items-center justify-between mx-auto p-5">
                     <Link to="/" className="flex items-center">
                         <img src={logo} className="h-8" alt="Cubtrone Logo" />
@@ -46,9 +46,9 @@ export default function Navbar() {
                     </button>
                     <div className="w-full md:block  md:w-auto">
                         <ul className={(mobileDrawerOpen ? "flex flex-col" : "hidden") + " font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:bg-transparent md:flex md:flex-row md:space-x-8 md:mt-0 md:border-0 "}>
-                            {navItem.map((item, index) => (
+                            {navItem.map((item, index) => 
                                 <NavLink key={index} to={item.link} className={({ isActive }) => (isActive ? " md:text-orange-500 md:bg-transparent text-white bg-orange-500" : "text-gray-900 hover:text-orange-500") + " block py-2 px-3 rounded md:bg-transparent md:p-0"}>{item.name}</NavLink>
-                            ))}
+                            )}
                         </ul>
                     </div>
                 </div>

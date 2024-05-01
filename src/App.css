@@ -2,20 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.body,
-html {
-    min-height: 100%
-}
 
-body {
-    height: 100vh;
-}
-
-#root{
-    height: 100vh;
-}
-
-.slick-slide > div {
+.slick-slide>div {
     margin: 0 10px
 }
 
@@ -32,19 +20,25 @@ body {
 } */
 
 .rotate {
-    animation: rotate 1s forwards; 
+    animation: rotate 1s forwards;
 }
 
 @keyframes rotate {
-    50% { transform: rotate(90deg); }
-   
-    100% { transform: rotate(90deg); }
+    50% {
+        transform: rotate(90deg);
+    }
+
+    100% {
+        transform: rotate(90deg);
+    }
 }
 
 .rev-rotate {
-    animation: revRotate 0.5s reverse; 
+    animation: revRotate 0.5s reverse;
 }
 
 @keyframes revRotate {
-    100% { transform: rotate(90deg); }
+    100% {
+        transform: rotate(90deg);
+    }
 }

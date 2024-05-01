@@ -7,6 +7,7 @@ import Signup from './pages/auth/Signup';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Navbar from './components/navbar/Navbar';
 import CourseVideos from './pages/CourseVideos';
+import Profile from './pages/Profile';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,6 +21,7 @@ root.render(
           <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="signup" element={<Signup />} />
           <Route path="course/:id" element={<CourseVideos />} />
+          <Route path="profile/:id" element={<Profile />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
