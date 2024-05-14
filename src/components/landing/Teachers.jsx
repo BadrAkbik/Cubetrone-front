@@ -4,9 +4,24 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TeacherCard from "./TeacherCard";
-
+import { useEffect } from "react";
+import api from "./../../api/Url"
+import { useState } from "react";
 
 export default function Teachers() {
+
+    const [teachers, setTeachers] = useState([])
+
+    useEffect(() => {
+        const fetchTeachers = async () => {
+            try {
+                const response = await api.get('/teachers').then(response => setTeachers(response.data.data))
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchTeachers()
+    }, [])
 
     const PreviousBtn = (props) => {
         const { className, style, onClick } = props;
@@ -61,15 +76,12 @@ export default function Teachers() {
         <div>
             <h1 className="font-bold max-w-48 text-2xl p-3 text-center text-gray-700 border-b border-orange-500 mx-auto mb-7">Teachers</h1>
             <div className="m-10">
-                <Slider {...settings}>
-                    <TeacherCard />
-                    <TeacherCard />
-                    <TeacherCard />
-                    <TeacherCard />
-                    <TeacherCard />
-                    <TeacherCard />
-                    <TeacherCard />
+                <Slider {...settings} className="lg:m-10 pb-8">
+                    {teachers.slice(0, 9).map((item, index) =>
+                        <TeacherCard key={index} fisrt_name={item.fisrt_name} image={item.image} last_name={item.last_name} />
+                    )}
                 </Slider>
+
             </div>
         </div >
     )

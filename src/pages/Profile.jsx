@@ -7,14 +7,14 @@ import About from "../components/profile/About";
 
 export default function Profile() {
     return (
-        <div className="max-w-screen-xl mx-auto p-5 md:flex">
+        <div className="max-w-lg md:max-w-screen-xl mx-auto p-5 md:flex">
             <div className="md:w-1/4 md:mx-2">
                 <ProfileCard />
                 <OtherProfilesCard />
             </div>
-            <div className="w-full md:w-9/12 mt-4 md:mt-0 md:mx-2 h-64 ">
+            <div className="w-full md:w-3/4 mt-4 md:mt-0 md:mx-2 h-64 ">
                 <About />
-                <div className="bg-white p-3 rounded-xl shadow-md mt-4 grid grid-cols-2">
+                {/* <div className="bg-white p-3 rounded-xl shadow-md mt-4 grid grid-cols-2">
                     <div>
                         <div className="flex items-center space-x-2 font-semibold text-gray-700 leading-8 mb-3">
                             <FaRegFileAlt className="text-orange-500 text-xl" />
@@ -41,9 +41,7 @@ export default function Profile() {
                     </div>
                     <div>
                         <div className="flex items-center space-x-2 font-semibold text-gray-700 leading-8 mb-3">
-                            <span clas="text-green-500">
-                                <LuGraduationCap className="text-orange-500 text-xl" />
-                            </span>
+                            <LuGraduationCap className="text-orange-500 text-2xl" />
                             <span className="tracking-wide">Education</span>
                         </div>
                         <ul className="list-inside space-y-2">
@@ -57,7 +55,7 @@ export default function Profile() {
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

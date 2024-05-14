@@ -15,7 +15,7 @@ export default function Main() {
             <div className="mx-5">
                 <div className="flex flex-col-reverse mx-6 mb-20 md:mx-12 justify-between md:flex-row">
                     <div className="md:mt-20 mt-10 md:w-1/2">
-                        <h1 className="font-bold text-4xl lg:text-6xl mb-6 text-gray-800"><span className="block">Learn</span> Programming <span className="text-orange-500">easily</span></h1>
+                        <h1 className="font-bold text-4xl lg:text-6xl mb-6 text-gray-800 italic"><span className="block">Learn</span> Programming <span className="text-orange-500">easily</span></h1>
                         <p className="text-gray-500 font-medium text-xl ">Cubetrone's unique e-learning platform offers a fun and engaging way for children to dive into the world of programming</p>
                     </div>
                     <img src={landing_1} alt="welcome" className="p-3 md:size-1/2" />

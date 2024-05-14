@@ -4,8 +4,32 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CourseCard from "./CourseCard";
+import { useEffect } from "react";
+import api from "./../../api/Url"
+import { useState } from "react";
+
 
 export default function Courses() {
+
+    const [courses, setCourses] = useState([])
+
+    useEffect(() => {
+        const fetchCourse = async () => {
+            try {
+                const response = await api.get('/courses').then(response => setCourses(response.data.data))
+
+            } catch (err) {
+                if (!err?.response) {
+                    console.log('No Server Response')
+                } else {
+                    console.log(err.response.data.message)
+                }
+            }
+        }
+        fetchCourse()
+        console.log(courses)
+    }, [])
+
 
     const PreviousBtn = (props) => {
         const { className, style, onClick } = props;
@@ -26,7 +50,7 @@ export default function Courses() {
         infinite: true,
         speed: 500,
         slidesToShow: 5,
-        slidesToScroll: 3,
+        slidesToScroll: 4,
         prevArrow: <PreviousBtn />,
         nextArrow: <NextBtn />,
         responsive: [
@@ -67,15 +91,19 @@ export default function Courses() {
     }
     return (
         <div>
-            <h1 className="font-bold max-w-48 text-2xl p-3 text-center text-gray-700 border-b border-orange-500 mx-auto mb-7">Our courses</h1>
+            <h1 className="font-bold max-w-60 text-2xl p-3 text-center text-gray-700 border-b border-orange-500 mx-auto mb-7">Feature courses</h1>
             <div className="m-10">
-                <Slider {...settings}>
-                    <CourseCard />
-                    <CourseCard />
-                    <CourseCard />
-                    <CourseCard />
-                    <CourseCard />
-                    <CourseCard />
+                <Slider {...settings} className="lg:m-10 pb-8">
+                    {courses.slice(0, 9).map((item, index) =>
+                        <CourseCard
+                            key={index}
+                            title={item.title}
+                            img={item.img}
+                            description={item.description}
+                            id={item.id}
+                            firstLessonId={item.first_lesson_id} 
+                            />
+                    )}
                 </Slider>
             </div>
         </div >
