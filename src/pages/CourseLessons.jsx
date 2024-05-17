@@ -8,7 +8,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 export default function CourseVideos() {
 
-  const { id, vidId } = useParams();
+  const { courseId, lessonId } = useParams();
   const [course, setCourse] = useState({})
   const [errMsg, setErrMsg] = useState('')
   const [currentLesson, setCurrentLesson] = useState({})
@@ -23,7 +23,7 @@ export default function CourseVideos() {
   useEffect(() => {
     const fetchCourseVideo = async () => {
       try {
-        const response = await api.get(`/courses/${id}`, {
+        const response = await api.get(`/courses/${courseId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access-token')}`
           }
@@ -43,17 +43,17 @@ export default function CourseVideos() {
 
   useEffect(() => {
     setCurrentLesson(
-      course.lessons?.find(lesson => lesson.id == vidId)
+      course.lessons?.find(lesson => lesson.id == lessonId)
     )
-  }, [course, vidId])
+  }, [course, lessonId])
 
 
   return (
     <div id="courseVid" className="flex flex-col md:flex-row max-w-[1400px] mx-auto">
       <SidePanel lessons={course.lessons} />
       <div className="w-full m-3 px-10 pb-10 border shadow-lg rounded-lg space-y-10">
-        <Video lessons={course.lessons} currentLesson={currentLesson} vidId={vidId} courseId={id} />
-        <CommentSection />
+        <Video lessons={course.lessons} currentLesson={currentLesson} courseId={courseId} />
+        <CommentSection lessonId={lessonId} />
       </div >
     </div >
   )

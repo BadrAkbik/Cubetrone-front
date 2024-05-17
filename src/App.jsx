@@ -5,7 +5,7 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Navbar from './components/navbar/Navbar';
-import CourseVideos from './pages/CourseVideos';
+import CourseLessons from './pages/CourseLessons';
 import Profile from './pages/Profile';
 import EmailVerification from './pages/auth/EmailVerification';
 
@@ -18,7 +18,7 @@ const App = () => {
                 <Route index element={<Home />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="signup" element={<Signup />} />
-                <Route path="course/:id/video/:vidId" element={<CourseVideos />} />
+                <Route path="course/:courseId/lesson/:lessonId" element={<CourseLessons />} />
                 <Route path="profile/:id" element={<Profile />} />
                 <Route path="email-verification" element={<EmailVerification />} />
             </Route>

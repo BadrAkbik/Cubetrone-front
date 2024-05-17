@@ -16,7 +16,7 @@ export default function Courses() {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const response = await api.get('/courses').then(response => setCourses(response.data.data))
+               await api.get('/courses').then(response => setCourses(response.data.data))
 
             } catch (err) {
                 if (!err?.response) {
@@ -27,7 +27,6 @@ export default function Courses() {
             }
         }
         fetchCourse()
-        console.log(courses)
     }, [])
 
 

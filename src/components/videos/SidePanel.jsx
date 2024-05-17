@@ -7,7 +7,7 @@ export default function SidePanel(props) {
             <div className="">
                 <ul className="space-y-2 font-medium text-gray-700">
                     {props.lessons && props.lessons.map((item, index) =>
-                        <VideoCard key={index} title={item.title} course_id={item.course_id} id={item.id}/>
+                        <VideoCard key={index} title={item.title} courseId={item.course_id} lessonId={item.id}/>
                     )}
                 </ul>
             </div>

@@ -5,7 +5,7 @@ export default function VideoCard(props) {
     return (
         <li className="bg-gray-100 hover:bg-gray-200 rounded-xl ">
             <NavLink
-                to={`/course/${props.course_id}/video/${props.id}`}
+                to={`/course/${props.courseId}/lesson/${props.lessonId}`}
                 className={
                     ({ isActive }) =>
                         (isActive ? " text-orange-500" : "text-gray-700 hover:text-orange-500") + " flex items-center p-5 hover:text-orange-500 rounded-lg"}
