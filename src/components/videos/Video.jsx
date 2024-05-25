@@ -37,7 +37,7 @@ export default function Video(props) {
                     }
                 </div>
                 <video className="w-full h-auto max-w-full rounded-xl" controls>
-                    <source src={require("../../mp4/hello.mp4")} type="video/mp4" />
+                    <source /* src={require("../../mp4/hello.mp4")} */ type="video/mp4" />
                 </video>
             </div>
             <div className="bg-gray-100 shadow-md p-3 rounded-xl md:w-3/4">

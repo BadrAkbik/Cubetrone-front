@@ -3,9 +3,10 @@ import OrangeBtn from "../../components/buttons/OrangeBtn"
 import CheckBox from "../../components/inputs/CheckBox"
 import SignupFields from "../../components/inputs/SignupFields"
 import api from "./../../api/Url"
-import { validateSignupInputs } from "../../functions/validate"
+import { validateInputs } from "../../functions/validate"
 import { useNavigate } from 'react-router-dom';
 import UserDataContext from "../../context/UserDataContext"
+import ErrMessage from "../../components/ErrMessage"
 
 
 export default function Signup() {
@@ -21,15 +22,7 @@ export default function Signup() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const [errors, setErrors] = useState({
-        first_name: '',
-        email: '',
-        phone_num: '',
-        gender: '',
-        date_of_birth: '',
-        password: '',
-        password_confirmation: '',
-    })
+    const [errors, setErrors] = useState({})
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -38,20 +31,29 @@ export default function Signup() {
 
         const data = new FormData(e.target)
 
-        const validationErrors = validateSignupInputs(data);
+        const validationErrors = validateInputs(data, 'signup');
 
         setErrors(validationErrors.errors)
 
-        if (validationErrors.hasErrors) {
-            setErrMsg("Invalid Entry")
-            return
-        }
 
         try {
+            if (validationErrors.hasErrors) {
+                setErrMsg("Invalid Entry")
+                setLoading(false)
+                return
+            }
             const response = await api.post('/register', data)
-            console.log(response.data)
+
             setSuccess(true)
             localStorage.setItem('access-token', response.data);
+
+            const userData = await api.get('/user',
+                {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
+                })
+
+
+            localStorage.setItem('userData', JSON.stringify(userData.data.data));
             setTimeout(() => {
                 navigate('/email-verification', { state: data.get('email') })
             }, 2000);
@@ -63,7 +65,6 @@ export default function Signup() {
             }
         } finally {
             setLoading(false);
-
         }
 
     }
@@ -74,17 +75,13 @@ export default function Signup() {
                 <div className=" w-full max-w-sm md:max-w-3xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 ">
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <h5 className="text-xl font-medium text-gray-700">Create your account</h5>
-
-                        {errMsg && <p
-                            className="bg-red-600 font-meduim p-3 mb-3 rounded-lg max-w-fit text-white text-sm"
-                            aria-live="assertive">{errMsg}
-                        </p>}
+                        <ErrMessage errMsg={errMsg} />
                         {success && <p
                             className="bg-blue-600 font-meduim p-3 mb-3 rounded-lg max-w-fit text-white text-sm"
                             aria-live="assertive">You have successfully registered to our site, please verify your email
                         </p>}
 
-                        <UserDataContext.Provider value={{ errors, setErrMsg, setErrors }}>
+                        <UserDataContext.Provider value={{ errors, setErrMsg, setErrors, errMsg }}>
                             <SignupFields />
                         </UserDataContext.Provider>
                         <div className="flex items-start">

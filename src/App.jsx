@@ -8,6 +8,8 @@ import Navbar from './components/navbar/Navbar';
 import CourseLessons from './pages/CourseLessons';
 import Profile from './pages/Profile';
 import EmailVerification from './pages/auth/EmailVerification';
+import Unauthorized from './pages/auth/Unauthorized';
+import AllCourses from './pages/AllCourses';
 
 
 const App = () => {
@@ -19,8 +21,10 @@ const App = () => {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="signup" element={<Signup />} />
                 <Route path="course/:courseId/lesson/:lessonId" element={<CourseLessons />} />
-                <Route path="profile/:id" element={<Profile />} />
+                <Route path="profile/:userId" element={<Profile />} />
                 <Route path="email-verification" element={<EmailVerification />} />
+                <Route path="courses" element={<AllCourses />} />
+                <Route path="/unauthorized" element={<Unauthorized />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>

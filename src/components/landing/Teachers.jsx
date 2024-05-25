@@ -78,7 +78,7 @@ export default function Teachers() {
             <div className="m-10">
                 <Slider {...settings} className="lg:m-10 pb-8">
                     {teachers.slice(0, 9).map((item, index) =>
-                        <TeacherCard key={index} fisrt_name={item.fisrt_name} image={item.image} last_name={item.last_name} />
+                        <TeacherCard key={index} id={item.id} first_name={item.first_name} image={item.image} last_name={item.last_name} />
                     )}
                 </Slider>
 

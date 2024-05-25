@@ -5,7 +5,6 @@ export default axios.create({
     withCredentials: true,
     withXSRFToken: true,
     headers: {
-        
         "Accept": "application/json",
     },
 })

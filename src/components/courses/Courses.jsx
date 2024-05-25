@@ -16,7 +16,7 @@ export default function Courses() {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-               await api.get('/courses').then(response => setCourses(response.data.data))
+                await api.get('/courses').then(response => setCourses(response.data.data))
 
             } catch (err) {
                 if (!err?.response) {
@@ -98,10 +98,12 @@ export default function Courses() {
                             key={index}
                             title={item.title}
                             img={item.img}
-                            description={item.description}
+                            brief={item.brief}
                             id={item.id}
-                            firstLessonId={item.first_lesson_id} 
-                            />
+                            firstLessonId={item.first_lesson_id}
+                            hasButton
+                            class="h-[500px]"
+                        />
                     )}
                 </Slider>
             </div>

@@ -6,7 +6,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function CourseCard(props) {
     return (
-        <div className="max-w-xs mx-auto bg-white border border-gray-200 rounded-lg shadow h-[500px]">
+        <div className={props.class + " max-w-xs mx-auto bg-white border border-gray-200 rounded-lg shadow"}>
             <a href="#">
                 <img className="rounded-t-lg" src={card_1} alt="teacher picture" />
             </a>
@@ -14,11 +14,14 @@ export default function CourseCard(props) {
                 <a href="#">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-700 ">{props.title}</h5>
                 </a>
-                <p className="mb-3 font-normal text-gray-700 h-40">{props.description}</p>
+                <p className="mb-3 font-normal text-gray-700 h-40">{props.brief}</p>
                 <div className="w-1/2">
-                    <BlueBtn name="Read more" courseId={props.id} lessonId={props.firstLessonId}>
-                        <FaLongArrowAltRight className="w-3.5 h-3.5 ms-2" />
-                    </BlueBtn>
+                    {props.hasButton &&
+
+                        <BlueBtn name="Read more" courseId={props.id} lessonId={props.firstLessonId}>
+                            <FaLongArrowAltRight className="w-3.5 h-3.5 ms-2" />
+                        </BlueBtn>
+                    }
                 </div>
 
             </div>

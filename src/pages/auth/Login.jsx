@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { validateLoginInputs } from "../../functions/validate";
+import { validateInputs } from "../../functions/validate";
 import api from "./../../api/Url"
 import Input from "../../components/inputs/Input";
 import UserDataContext from "../../context/UserDataContext"
 import OrangeBtn from "../../components/buttons/OrangeBtn";
 import CheckBox from "../../components/inputs/CheckBox";
+import ErrMessage from "../../components/ErrMessage";
 
 
 
 
 export default function Login() {
-
     useEffect(() => {
         if (localStorage.getItem('access-token')) {
             navigate('/')
@@ -22,11 +22,8 @@ export default function Login() {
     const navigate = useNavigate();
     const [errMsg, setErrMsg] = useState('');
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({})
 
-    const [errors, setErrors] = useState({
-        email: '',
-        password: '',
-    })
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,12 +32,14 @@ export default function Login() {
 
         const data = new FormData(e.target)
 
-        const validationErrors = validateLoginInputs(data);
+        const validationErrors = validateInputs(data, 'login');
 
         setErrors(validationErrors.errors)
 
         if (validationErrors.hasErrors) {
             setErrMsg("Invalid Entry")
+            setLoading(false)
+
             return
         }
         try {
@@ -50,8 +49,8 @@ export default function Login() {
                 {
                     headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
                 })
+
             localStorage.setItem('userData', JSON.stringify(userData.data.data));
-            console.log(userData.data.data)
             if (userData) {
                 navigate('/')
             }
@@ -74,10 +73,7 @@ export default function Login() {
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <h5 className="text-xl font-medium text-gray-700">Sign in to your account</h5>
 
-                        {errMsg && <p
-                            className="bg-red-600 font-meduim p-3 mb-3 rounded-lg max-w-fit text-white text-sm"
-                            aria-live="assertive">{errMsg}
-                        </p>}
+                        <ErrMessage errMsg={errMsg} />
 
                         <UserDataContext.Provider value={{ errors, setErrMsg, setErrors }}>
                             <Input type="email" id="email" label="Your email" placeholder="name@mail.com" required />

@@ -7,7 +7,9 @@ export default function CommentHead(props) {
                 <img className="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt={props.userName} />
                 {props.userName}
             </p>
-            <p className="text-sm text-gray-600">{format(props.createdAt, 'dd MMMM yyyy, h:mm a')}</p>
+            {props.createAt &&
+                <p className="text-sm text-gray-600">{format(props.createdAt, 'dd MMMM yyyy, h:mm a')}</p>
+            }
         </div>
     )
 }

@@ -1,15 +1,13 @@
 import { useContext } from "react"
 import UserDataContext from "../../context/UserDataContext"
+import ErrMessage from "../ErrMessage"
 
 
 export default function SelectField() {
     const { errors } = useContext(UserDataContext)
     return (
         <div>
-            {errors['gender'] && <p
-                className="bg-red-600 p-3 mb-3 rounded-lg max-w-fit text-white text-xs"
-                aria-live="assertive">{errors['gender']}
-            </p>}
+            <ErrMessage errMsg={errors['gender']} />
             <label htmlFor="gender" className=" block mb-2 text-sm font-medium text-gray-900">Gender</label>
             <select
                 name='gender'

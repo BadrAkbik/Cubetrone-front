@@ -16,21 +16,29 @@ export default function Navbar() {
 
     useEffect(() => {
 
-        if (localStorage.getItem('access-token')) {
-
+        if (localStorage.getItem('access-token') && localStorage.getItem('userData')) {
+            
             const userData = JSON.parse(localStorage.getItem('userData'))
+
             setNavItem([
                 { name: "Home", link: "/" },
-                { name: "About", link: "/about" },
-                { name: `${userData.first_name} ${userData.last_name}`, profile: true, link: `profile/${userData.id}`, role: userData.role },
+                { name: "Courses", link: "/courses" },
+                {
+                    name: `${userData.first_name} ${userData.last_name}`,
+                    profile: true,
+                    link: `profile/${userData.id}`,
+                    role: userData.role,
+                    verified: userData.email_verified_at,
+                    email: userData.email
+                },
             ]);
 
         } else {
             setNavItem([
                 { name: "Home", link: "/" },
-                { name: "About", link: "/about" },
+                { name: "Courses", link: "/courses" },
                 { name: "Login", link: "/login" },
-                { name: "Signup", link: "/signup" }
+                { name: "Signup", link: "/signup" },
             ]);
         }
 
@@ -86,11 +94,26 @@ export default function Navbar() {
                                         <Dropdown label={item.name} inline>
 
                                             <Dropdown.Header className='border-b border-gray-200 text-blue-500'>
-                                                <span className="block truncate font-semibold">Student</span>
+                                                <span className="block truncate font-semibold capitalize">{item.role}</span>
                                             </Dropdown.Header>
 
-                                            {item.role === 'teacher' &&
-                                                <Dropdown.Item className='hover:text-orange-500' as={NavLink} to='/dashboard' >Dashboard</Dropdown.Item>
+                                            {(item.role === 'teacher' || item.role === 'admin') &&
+                                                <Dropdown.Item className='hover:text-orange-500' as={NavLink} to='http://127.0.0.1:8000/admin' >Dashboard</Dropdown.Item>
+                                            }
+
+                                            {!item.verified &&
+                                                <Dropdown.Item>
+                                                    <NavLink
+                                                        to={{ pathname: '/email-verification', state: item.email }}
+                                                        className={
+                                                            ({ isActive }) =>
+                                                                (isActive ? " text-orange-500" : "text-gray-700 hover:text-orange-500") + " block rounded bg-transparent md:p-0"
+                                                        }
+                                                    >
+                                                        Verify your email
+                                                    </NavLink>
+
+                                                </Dropdown.Item>
                                             }
 
                                             <Dropdown.Item>
@@ -101,10 +124,10 @@ export default function Navbar() {
                                                             (isActive ? " text-orange-500" : "text-gray-700 hover:text-orange-500") + " block rounded bg-transparent md:p-0"
                                                     }
                                                 >
-                                                    Profile Settings
+                                                    My Profile
                                                 </NavLink>
                                             </Dropdown.Item>
-
+                                            
                                             <Dropdown.Item className='hover:text-orange-500' as="button" onClick={handleLogout}>Sign out</Dropdown.Item>
                                         </Dropdown>
                                     </div>

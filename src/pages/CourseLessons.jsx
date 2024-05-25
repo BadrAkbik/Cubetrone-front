@@ -3,7 +3,7 @@ import SidePanel from "../components/videos/SidePanel";
 import Video from "../components/videos/Video";
 import { useEffect, useState } from "react";
 import api from "./../api/Url"
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 
 export default function CourseVideos() {
@@ -12,12 +12,21 @@ export default function CourseVideos() {
   const [course, setCourse] = useState({})
   const [errMsg, setErrMsg] = useState('')
   const [currentLesson, setCurrentLesson] = useState({})
+  const navigate = useNavigate();
+
 
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!localStorage.getItem('access-token')) {
+      navigate('/unauthorized')
+    }
+  }, [])
+
 
 
   useEffect(() => {
