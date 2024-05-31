@@ -21,7 +21,7 @@ export default function Input({ id, type, label, placeholder, required, children
                 {type === 'textarea' ?
                     <textarea
                         id={id}
-                        value={Value}
+                        value={Value ?? ''}
                         onChange={handlechange}
                         name={id}
                         rows={7}
@@ -37,7 +37,7 @@ export default function Input({ id, type, label, placeholder, required, children
                         className={(id == "phone_num" ? "ps-10 " : "") + "bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5"}
                         placeholder={placeholder} required={required}
                         onChange={handlechange} autoFocus={autoFocus}
-                        value={Value}
+                        value={Value ?? ''}
                     />}
             </div>
         </div>

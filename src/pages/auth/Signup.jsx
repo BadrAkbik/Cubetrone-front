@@ -61,6 +61,7 @@ export default function Signup() {
             if (!err?.response) {
                 setErrMsg('No Server Response')
             } else {
+                console.log(err.response.data)
                 setErrMsg(err.response.data.message)
             }
         } finally {
@@ -84,9 +85,9 @@ export default function Signup() {
                         <UserDataContext.Provider value={{ errors, setErrMsg, setErrors, errMsg }}>
                             <SignupFields />
                         </UserDataContext.Provider>
-                        <div className="flex items-start">
+{/*                         <div className="flex items-start">
                             <CheckBox />
-                        </div>
+                        </div> */}
                         <div className="flex justify-center">
                             <OrangeBtn class="w-1/2" loading={loading} >
                                 Create new account

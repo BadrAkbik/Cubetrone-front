@@ -97,7 +97,7 @@ export default function Courses() {
                         <CourseCard
                             key={index}
                             title={item.title}
-                            img={item.img}
+                            image={item.image}
                             brief={item.brief}
                             id={item.id}
                             firstLessonId={item.first_lesson_id}

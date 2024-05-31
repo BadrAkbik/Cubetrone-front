@@ -98,7 +98,7 @@ export default function Navbar() {
                                             </Dropdown.Header>
 
                                             {(item.role === 'teacher' || item.role === 'admin') &&
-                                                <Dropdown.Item className='hover:text-orange-500' as={NavLink} to='http://127.0.0.1:8000/admin' >Dashboard</Dropdown.Item>
+                                                <Dropdown.Item className='hover:text-orange-500' as={NavLink} to='http://127.0.0.1:8000/dashboard' >Dashboard</Dropdown.Item>
                                             }
 
                                             {!item.verified &&

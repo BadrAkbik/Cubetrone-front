@@ -8,7 +8,7 @@
 }
 
 .rotate {
-    animation: rotate 1s forwards;
+    animation: rotate 0.5s forwards;
 }
 
 @keyframes rotate {
@@ -22,11 +22,18 @@
 }
 
 .rev-rotate {
-    animation: revRotate 0.5s reverse;
+    animation: revRotate 0.2s reverse;
 }
 
 @keyframes revRotate {
     100% {
         transform: rotate(90deg);
     }
+}
+
+.react-player {
+    border-radius: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
 }

@@ -14,6 +14,7 @@ export default function SignupFields() {
             <FieldsColumn>
                 <Input autoFocus type="text" id="first_name" label="First name" placeholder="Type your first name" required />
                 <Input type="text" id="last_name" label="Last name" placeholder="Type your last name" required />
+                <Input type="text" id="username" label="User name" placeholder="Type your user name" required />
                 <Input type="email" id="email" label="Your email" placeholder="name@mail.com" required />
                 <DateInput />
             </FieldsColumn>

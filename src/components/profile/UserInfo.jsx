@@ -12,7 +12,7 @@ const UserInfo = (props) => {
     const formRef = useRef(null);
 
     const handleEdit = () => {
-    setActiveLabel({
+        setActiveLabel({
             type: 'editing'
         })
     }
@@ -30,7 +30,7 @@ const UserInfo = (props) => {
 
     return (
         <li className="flex justify-between items-center border-y py-2">
-            <div className='flex items-center space-x-2'>
+            <div className='flex items-center space-x-2 py-2'>
                 <span className="font-bold w-24">{props.label}:</span>
                 {activeLabel.type !== "editing" ?
                     <span className="text-gray-700">{props.info}</span>

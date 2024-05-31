@@ -40,7 +40,7 @@ export default function Profile() {
             }
         }
         fetchUser()
-    }, [loading])
+    }, [loading, userId])
 
     useEffect(() => {
         if (user.image) {
@@ -49,15 +49,15 @@ export default function Profile() {
         setUserInfo([
             { label: 'First name', info: user.first_name, name: 'first_name' },
             { label: 'Last name', info: user.last_name, name: 'last_name' },
+            { label: 'User name', info: user.username, name: 'username' },
             { label: 'Email', info: user.email, name: 'email' },
             { label: 'Mobile', info: user.phone_num, name: 'phone_num' },
             { label: 'Joined', info: user.created_at && format(user.created_at, 'dd MMMM yyyy'), name: 'createdAt' },
         ])
-    }, [user, userId])
+    }, [user])
 
 
     const handleEdit = () => {
-        console.log('edit')
         setActiveLabel({
             type: 'editing'
         })
@@ -114,7 +114,6 @@ export default function Profile() {
                             'Content-Type': 'multipart/form-data'
                         },
                     });
-                console.log(response.data)
                 if (response.status === 200) {
                     setProfileImage(response.data.url);
                 } else {

@@ -5,7 +5,6 @@ import api from "./../../api/Url"
 import Input from "../../components/inputs/Input";
 import UserDataContext from "../../context/UserDataContext"
 import OrangeBtn from "../../components/buttons/OrangeBtn";
-import CheckBox from "../../components/inputs/CheckBox";
 import ErrMessage from "../../components/ErrMessage";
 
 
@@ -81,8 +80,7 @@ export default function Login() {
                         </UserDataContext.Provider>
 
                         <div className="flex items-start">
-                            <CheckBox />
-                            <Link to="/forgot-password" className="ms-auto text-sm text-orange-500 hover:underline">Lost Password?</Link>
+                            <Link to="/forgot-password" className="text-sm text-orange-500 hover:underline">Lost Password?</Link>
                         </div>
                         <OrangeBtn class="w-full" loading={loading} >
                             LogIn

@@ -52,16 +52,16 @@ export default function CourseVideos() {
 
   useEffect(() => {
     setCurrentLesson(
-      course.lessons?.find(lesson => lesson.id == lessonId)
+      course.lessons?.data.find(lesson => lesson.id == lessonId)
     )
   }, [course, lessonId])
 
 
   return (
     <div id="courseVid" className="flex flex-col md:flex-row max-w-[1400px] mx-auto">
-      <SidePanel lessons={course.lessons} />
+      <SidePanel lessons={course.lessons?.data} />
       <div className="w-full m-3 px-10 pb-10 border shadow-lg rounded-lg space-y-10">
-        <Video lessons={course.lessons} currentLesson={currentLesson} courseId={courseId} />
+        <Video lessons={course.lessons?.data} currentLesson={currentLesson} courseId={courseId} />
         <CommentSection lessonId={lessonId} />
       </div >
     </div >

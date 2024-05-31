@@ -5,7 +5,8 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{8,24}$/;
 const PHONE_REGEX = /^[\+0-9]{9,13}$/
 const GENDER_LIST = ['male', 'female']
 const VERIFICATION_CODE = /^[\+0-9]{6}$/
-const MAX_LENGTH_1000_REGEX =  /^.{0,2200}$/
+const MAX_LENGTH_REGEX = /^.{0,2200}$/
+const USER_NAME = /^[a-zA-Z0-9]{6,14}$/
 
 const SignupRules = [
     {
@@ -17,6 +18,11 @@ const SignupRules = [
         field: 'last_name',
         validate: (value) => USER_REGEX.test(value) && value.trim(),
         errorMessage: 'please write a valid and not a long name'
+    },
+    {
+        field: 'username',
+        validate: (value) => USER_NAME.test(value) && value.trim(),
+        errorMessage: 'The user name must have between 6 and 14 characters, Allowed characters are only letters and numbers'
     },
     {
         field: 'email',
@@ -77,6 +83,11 @@ const updateUserRules = [
         errorMessage: 'please write a valid and not a long name'
     },
     {
+        field: 'username',
+        validate: (value) => !value.trim() || (USER_NAME.test(value) && value.trim()),
+        errorMessage: 'The user name must have between 6 and 14 characters, Allowed characters are only letters and numbers'
+    },
+    {
         field: 'email',
         validate: (value) => !value.trim() || (EMAIL_REGEX.test(value) && value.trim()),
         errorMessage: 'please write a valid email'
@@ -93,7 +104,7 @@ const updateUserRules = [
     },
     {
         field: 'about',
-        validate: (value) => !value.trim() || (MAX_LENGTH_1000_REGEX.test(value) && value.trim()),
+        validate: (value) => !value.trim() || (MAX_LENGTH_REGEX.test(value) && value.trim()),
         errorMessage: 'Do not type above 2200 character please'
     },
     {

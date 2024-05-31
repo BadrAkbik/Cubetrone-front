@@ -24,6 +24,7 @@ const DateInput = () => {
                     onChange={(e) => setDate(e)}
                     className='block p-[7px] bg-gray-50 border border-gray-300 rounded-lg w-full text-gray-500'
                     max="2017-01-01"
+                    min="1940-01-01"
                 />
             </div>
 

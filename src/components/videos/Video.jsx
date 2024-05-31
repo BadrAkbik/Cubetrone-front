@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import BlueBtn from "../buttons/BlueBtn";
+import ReactPlayer from 'react-player'
 
 export default function Video(props) {
     const [lessonsIds, setlessonsIds] = useState([])
@@ -22,6 +23,8 @@ export default function Video(props) {
             setNextLesson(lessonsIds[index + 1])
             setPrevLesson(lessonsIds[index - 1])
         }
+        console.log(props.currentLesson?.video?.path)
+
     }, [lessonsIds, props.currentLesson])
 
     return (
@@ -36,9 +39,7 @@ export default function Video(props) {
                         <BlueBtn name="Next video" courseId={props.courseId} lessonId={nextLesson} />
                     }
                 </div>
-                <video className="w-full h-auto max-w-full rounded-xl" controls>
-                    <source /* src={require("../../mp4/hello.mp4")} */ type="video/mp4" />
-                </video>
+                <ReactPlayer width='100%' height='100%' controls url={`${process.env.REACT_APP_BASE_API_URL}/lessons_videos/${props.currentLesson?.video?.path}`} />
             </div>
             <div className="bg-gray-100 shadow-md p-3 rounded-xl md:w-3/4">
                 <h3 className="text-2xl mb-3 font-bold text-gray-700">Description</h3>
