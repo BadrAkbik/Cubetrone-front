@@ -85,7 +85,7 @@ export default function Signup() {
                         <UserDataContext.Provider value={{ errors, setErrMsg, setErrors, errMsg }}>
                             <SignupFields />
                         </UserDataContext.Provider>
-{/*                         <div className="flex items-start">
+                        {/*                         <div className="flex items-start">
                             <CheckBox />
                         </div> */}
                         <div className="flex justify-center">

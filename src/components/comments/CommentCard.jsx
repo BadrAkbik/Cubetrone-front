@@ -5,14 +5,12 @@ import CommentForm from './CommentForm';
 import api from "./../../api/Url"
 import { Dropdown } from "flowbite-react";
 
-
-
-
 export default function CommentCard(props) {
 
     const [type, settype] = useState("comment")
     const [activeComment, setActiveComment] = useState({})
     const loggedUserId = JSON.parse(localStorage.getItem('userData')).id
+    const loggedUserRole = JSON.parse(localStorage.getItem('userData')).role
 
 
     const handleEdit = () => {
@@ -66,9 +64,11 @@ export default function CommentCard(props) {
             <article className={(type == "comment" ? "border shadow-md" : "mb-3 ml-6 lg:ml-12") + " mb-3 p-6 text-base rounded-lg"}>
                 <footer className="flex justify-between items-center mb-2">
                     <CommentHead userName={props.userName} createdAt={props.createdAt} />
-                    {loggedUserId === props.userId &&
+                    {(loggedUserId === props.userId || loggedUserRole === 'admin') &&
                         <Dropdown inline>
-                            <Dropdown.Item className='hover:text-orange-500' onClick={handleEdit}>Edit</Dropdown.Item>
+                            {loggedUserId === props.userId &&
+                                <Dropdown.Item className='hover:text-orange-500' onClick={handleEdit}>Edit</Dropdown.Item>
+                            }
                             <Dropdown.Item className='hover:text-orange-500' onClick={handleRemove}>Remove</Dropdown.Item>
                         </Dropdown>
                     }

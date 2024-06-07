@@ -4,9 +4,9 @@ import Input from './../inputs/Input'
 import UserDataContext from '../../context/UserDataContext'
 
 
-const UserInfo = (props) => {
+const UserInfo = () => {
 
-    const { errors } = useContext(UserDataContext)
+    const { handleSubmit, loading, label, info, name, userId, loggedUserId } = useContext(UserDataContext)
 
     const [activeLabel, setActiveLabel] = useState({})
     const formRef = useRef(null);
@@ -21,9 +21,9 @@ const UserInfo = (props) => {
         setActiveLabel({})
     }
 
-    const handleSubmit = (e) => {
+    const handlesubmit = (e) => {
         e.preventDefault()
-        props.handleSubmit(e)
+        handleSubmit(e)
         setActiveLabel({})
     }
 
@@ -31,16 +31,16 @@ const UserInfo = (props) => {
     return (
         <li className="flex justify-between items-center border-y py-2">
             <div className='flex items-center space-x-2 py-2'>
-                <span className="font-bold w-24">{props.label}:</span>
+                <span className="font-bold w-24">{label}:</span>
                 {activeLabel.type !== "editing" ?
-                    <span className="text-gray-700">{props.info}</span>
+                    <span className="text-gray-700">{info}</span>
                     :
-                    <form ref={formRef} onSubmit={handleSubmit}>
-                        <Input type="text" id={props.name} value={props.info} placeholder={`Type your ${props.label}`} />
+                    <form ref={formRef} onSubmit={handlesubmit}>
+                        <Input type="text" id={name} value={info} placeholder={`Type your ${label}`} />
                     </form>
                 }
             </div>
-            {props.name !== 'createdAt' && props.loggedUserId == props.userId &&
+            {name !== 'createdAt' && loggedUserId == userId &&
                 (activeLabel.type !== "editing" ?
                     <OrangeBtn onClick={handleEdit}>
                         Edit
@@ -48,7 +48,7 @@ const UserInfo = (props) => {
                     :
                     <div className="flex justify-between space-x-10">
                         <OrangeBtn
-                            loading={props.loading}
+                            loading={loading}
                             onClick={() => formRef.current && formRef.current.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
                         >
                             Submit

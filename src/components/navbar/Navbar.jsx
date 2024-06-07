@@ -97,7 +97,7 @@ export default function Navbar() {
                                                 <span className="block truncate font-semibold capitalize">{item.role}</span>
                                             </Dropdown.Header>
 
-                                            {(item.role === 'teacher' || item.role === 'admin') &&
+                                            {(item.role !== 'student') &&
                                                 <Dropdown.Item className='hover:text-orange-500' as={NavLink} to='http://127.0.0.1:8000/dashboard' >Dashboard</Dropdown.Item>
                                             }
 

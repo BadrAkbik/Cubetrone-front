@@ -17,13 +17,12 @@ export default function Video(props) {
 
     useEffect(() => {
 
-        const index = lessonsIds?.indexOf(props.currentLesson.id);
+        const index = lessonsIds?.indexOf(props.currentLesson?.id);
 
         if (index >= 0) {
             setNextLesson(lessonsIds[index + 1])
             setPrevLesson(lessonsIds[index - 1])
         }
-        console.log(props.currentLesson?.video?.path)
 
     }, [lessonsIds, props.currentLesson])
 
@@ -33,10 +32,14 @@ export default function Video(props) {
             <div>
                 <div className="flex justify-between mb-5">
                     {prevLesson &&
-                        <BlueBtn name="Prev video" courseId={props.courseId} lessonId={prevLesson} />
+                        <BlueBtn to={`/course/${props.courseId}/lesson/${prevLesson}`} >
+                            Prev video
+                        </BlueBtn>
                     }
                     {nextLesson &&
-                        <BlueBtn name="Next video" courseId={props.courseId} lessonId={nextLesson} />
+                        <BlueBtn to={`/course/${props.courseId}/lesson/${nextLesson}`} >
+                            Next video
+                        </BlueBtn>
                     }
                 </div>
                 <ReactPlayer width='100%' height='100%' controls url={`${process.env.REACT_APP_BASE_API_URL}/lessons_videos/${props.currentLesson?.video?.path}`} />

@@ -5,7 +5,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{8,24}$/;
 const PHONE_REGEX = /^[\+0-9]{9,13}$/
 const GENDER_LIST = ['male', 'female']
 const VERIFICATION_CODE = /^[\+0-9]{6}$/
-const MAX_LENGTH_REGEX = /^.{0,2200}$/
+const MAX_LENGTH_REGEX = /^[\s\S]{0,2500}$/
 const USER_NAME = /^[a-zA-Z0-9]{6,14}$/
 
 const SignupRules = [
@@ -98,14 +98,9 @@ const updateUserRules = [
         errorMessage: 'please write a valid phone number'
     },
     {
-        field: 'gender',
-        validate: (value) => !value.trim() || (GENDER_LIST.includes(value) && value.trim()),
-        errorMessage: 'please select gender between male or female'
-    },
-    {
         field: 'about',
         validate: (value) => !value.trim() || (MAX_LENGTH_REGEX.test(value) && value.trim()),
-        errorMessage: 'Do not type above 2200 character please'
+        errorMessage: 'Do not type above 2500 character please'
     },
     {
         field: 'date_of_birth',

@@ -80,7 +80,7 @@ export default function Login() {
                         </UserDataContext.Provider>
 
                         <div className="flex items-start">
-                            <Link to="/forgot-password" className="text-sm text-orange-500 hover:underline">Lost Password?</Link>
+                            <Link to="/forgot-password" className="text-sm text-orange-500 hover:underline font-medium">Lost Password?</Link>
                         </div>
                         <OrangeBtn class="w-full" loading={loading} >
                             LogIn

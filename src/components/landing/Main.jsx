@@ -28,7 +28,6 @@ export default function Main() {
                 </div>
 
                 <Courses />
-
                 <Teachers />
 
                 <div className="flex flex-col-reverse md:flex-row justify-between mx-auto">

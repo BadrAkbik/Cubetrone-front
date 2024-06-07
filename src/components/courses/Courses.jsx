@@ -11,6 +11,7 @@ import { useState } from "react";
 
 export default function Courses() {
 
+    const [enrolledCourses, setenrolledCourses] = useState([])
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
@@ -25,6 +26,20 @@ export default function Courses() {
                     console.log(err.response.data.message)
                 }
             }
+        }
+        const fetchEnrollments = async () => {
+            try {
+                const response = await api.get('/enrollments', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+                }).then(response => setenrolledCourses(response.data.data))
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        if (localStorage.getItem('access-token')) {
+            fetchEnrollments()
         }
         fetchCourse()
     }, [])
@@ -90,19 +105,20 @@ export default function Courses() {
     }
     return (
         <div>
-            <h1 className="font-bold max-w-60 text-2xl p-3 text-center text-gray-700 border-b border-orange-500 mx-auto mb-7">Feature courses</h1>
+            <h1 className="font-bold max-w-60 text-2xl p-3 text-center text-gray-700 border-b border-orange-500 mx-auto mb-7">New courses</h1>
             <div className="m-10">
-                <Slider {...settings} className="lg:m-10 pb-8">
+                <Slider {...settings} className="lg:m-10 pb-9">
                     {courses.slice(0, 9).map((item, index) =>
                         <CourseCard
+                            enrolledCourses={enrolledCourses}
                             key={index}
+                            categoryName={item.category_name}
                             title={item.title}
                             image={item.image}
                             brief={item.brief}
                             id={item.id}
                             firstLessonId={item.first_lesson_id}
-                            hasButton
-                            class="h-[500px]"
+                            class="h-[520px]"
                         />
                     )}
                 </Slider>

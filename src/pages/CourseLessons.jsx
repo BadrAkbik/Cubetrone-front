@@ -12,6 +12,7 @@ export default function CourseVideos() {
   const [course, setCourse] = useState({})
   const [errMsg, setErrMsg] = useState('')
   const [currentLesson, setCurrentLesson] = useState({})
+  const [enrolledCourses, setenrolledCourses] = useState([])
   const navigate = useNavigate();
 
 
@@ -22,9 +23,21 @@ export default function CourseVideos() {
   }, [pathname]);
 
   useEffect(() => {
+
     if (!localStorage.getItem('access-token')) {
       navigate('/unauthorized')
     }
+    const fetchEnrollments = async () => {
+      try {
+        const response = await api.get('/enrollments', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access-token')}`
+          }
+        }).then(response => setenrolledCourses(response.data.data))
+      } catch (err) {
+      }
+    }
+    fetchEnrollments()
   }, [])
 
 
