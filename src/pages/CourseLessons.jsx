@@ -13,7 +13,9 @@ export default function CourseVideos() {
   const [errMsg, setErrMsg] = useState('')
   const [currentLesson, setCurrentLesson] = useState({})
   const [enrolledCourses, setenrolledCourses] = useState([])
+  const [watchedLessons, setwatchedLessons] = useState([])
   const navigate = useNavigate();
+
 
 
   const { pathname } = useLocation();
@@ -38,6 +40,17 @@ export default function CourseVideos() {
       }
     }
     fetchEnrollments()
+    const fetchProgress = async () => {
+      try {
+        const response = await api.get(`/enrollments/progress/${courseId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access-token')}`
+          }
+        }).then(response => setwatchedLessons(response.data.data))
+      } catch (err) {
+      }
+    }
+    fetchProgress()
   }, [])
 
 
@@ -74,7 +87,7 @@ export default function CourseVideos() {
     <div id="courseVid" className="flex flex-col md:flex-row max-w-[1400px] mx-auto">
       <SidePanel lessons={course.lessons?.data} />
       <div className="w-full m-3 px-10 pb-10 border shadow-lg rounded-lg space-y-10">
-        <Video lessons={course.lessons?.data} currentLesson={currentLesson} courseId={courseId} />
+        <Video lessons={course.lessons?.data} currentLesson={currentLesson} courseId={courseId} watchedLessons={watchedLessons} />
         <CommentSection lessonId={lessonId} />
       </div >
     </div >

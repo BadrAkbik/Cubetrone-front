@@ -34,7 +34,6 @@ const EnrolledCourses = () => {
                         first_lesson_id={item.first_lesson_id}
                         title={item.title}
                         category_name={item.category_name}
-                        progress={item.progress}
                         loading={loading}
                         setLoading={setLoading}
                     />
